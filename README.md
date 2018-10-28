@@ -2,10 +2,9 @@ Install app:
 
 1. git clone
 2. Выполните php composer.phar install
-3. Выполните php yii init
-4. Пропишите конфиг базы в config/web.php
-5. Запустите миграцию php yii migrate
-6. Скопируйте картинки в web/images/
+3. Пропишите конфиг базы в config/web.php
+4. Запустите миграцию php yii migrate
+5. Скопируйте картинки в web/images/
 
 Урл: 
 1) /categories
