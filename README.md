@@ -1,6 +1,6 @@
 Install app:
 
-1. git pull
+1. git clone
 2. Выполните php composer.phar install
 3. Выполните php yii init
 4. Пропишите конфиг базы в config/web.php
