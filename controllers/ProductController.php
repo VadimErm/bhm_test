@@ -10,8 +10,6 @@ namespace app\controllers;
 
 
 use app\models\Product;
-use yii\db\Expression;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\HttpException;
 
@@ -27,7 +25,7 @@ class ProductController extends Controller
 
         return $this->render('index', [
             'model' => $model,
-            'randomProducts' => $randomProducts
+            'randomProducts' => $randomProducts,
             ]);
     }
 
@@ -39,27 +37,13 @@ class ProductController extends Controller
             ->where(['category_products.category_id' => $product->category->category_id])
             ->andWhere(['!=','products.product_id', $product->product_id])
             ->all();
-        if(count($products) >= 2) {
-            $random = array_rand($products, 2);
-            $result[] = $products[$random[0]];
-            $result[] = $products[$random[1]];
-        } elseif (count($products) === 1) {
-            $result[] = $products[0];
+        if(count($products) >= Product::RANDOM_PRODUCTS_COUNT) {
+            $random = array_rand($products, Product::RANDOM_PRODUCTS_COUNT);
+            foreach ($random as $item) {
+                $result[] = $products[$item];
+            }
         }
-
         return $result;
     }
 
-    public function actionMostCommented()
-    {
-        $model = Product::find()
-            ->select(new Expression('products.name, products.description, products.price, comments.product_id, count(*) as count'))
-            ->leftJoin('comments', 'comments.product_id = products.product_id')
-            ->groupBy('comments.product_id')
-            ->orderBy('count DESC')
-            ->limit(1)
-            ->one();
-
-
-    }
 }

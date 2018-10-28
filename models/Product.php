@@ -23,11 +23,14 @@ use yii\db\ActiveQuery;
  * @property string $mainImage
  * @property string $priceFormatted
  * @property ActiveQuery $category
+ * @property int $commentsCount
  */
 class Product extends \yii\db\ActiveRecord
 {
 
     const DESCRIPTION_MAX_CHARS = 300;
+    const RANDOM_PRODUCTS_COUNT = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -119,6 +122,11 @@ class Product extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::class, ['category_id' => 'category_id'])->via('categoryProducts');
+    }
+
+    public function getCommentsCount()
+    {
+        return $this->getComments()->count();
     }
 
 

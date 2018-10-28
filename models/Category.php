@@ -15,6 +15,7 @@ use yii\db\ActiveQuery;
  * @property ActiveQuery $parent
  * @property int $productTotalCount
  * @property int $productCount
+ * @property ActiveQuery $products
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -63,6 +64,11 @@ class Category extends \yii\db\ActiveRecord
     public function getCategoryProducts()
     {
         return $this->hasMany(CategoryProducts::class, ['category_id' => 'category_id']);
+    }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Product::class, ['product_id' => 'product_id'])->via('categoryProducts');
     }
 
     public function getProductCount()

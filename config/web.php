@@ -58,6 +58,7 @@ $config = [
                 '' => 'site/index',
                 'category/<id:\d+>' => 'categories/category',
                 'product/<id:\d+>' => 'product/index',
+                'brand/<id:\d+>' => 'brands/view',
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],
         ],

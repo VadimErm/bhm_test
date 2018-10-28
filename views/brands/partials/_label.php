@@ -1,0 +1,1 @@
+<?= $brand->brand_name ?> <span class="pull-right badge"> Коментариев: <?= $brand->commentsCount ?> </span>

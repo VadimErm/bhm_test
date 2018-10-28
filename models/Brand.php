@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 
 /**
  * This is the model class for table "brands".
@@ -11,6 +10,7 @@ use Yii;
  * @property string $brand_name
  *
  * @property Product[] $products
+ * @property int $commentsCount
  */
 class Brand extends \yii\db\ActiveRecord
 {
@@ -51,4 +51,15 @@ class Brand extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Product::class, ['brand_id' => 'brand_id']);
     }
+
+    public function getCommentsCount()
+    {
+        $count = 0;
+        /** @var Product $product */
+        foreach ($this->products as $product) {
+           $count += $product->commentsCount;
+       }
+       return $count;
+    }
+
 }
